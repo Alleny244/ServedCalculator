@@ -1,0 +1,50 @@
+#pic {
+  background-image: url("../images/login.jpg");
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+#a {
+  color: aliceblue;
+  margin-bottom: 100px;
+  margin-left: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: larger;
+}
+#b {
+  font-size: larger;
+  text-decoration: none;
+  color: white;
+  margin-left: 50px;
+  width: 180px;
+  height: 100px;
+  padding: 40px;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+#b:hover {
+  background-color: white;
+  color: green;
+  border: green;
+  border-width: thick;
+  font-size: x-large;
+}
+
+#c {
+  font-size: larger;
+  text-decoration: none;
+  color: white;
+  margin-left: 1300px;
+  width: 180px;
+  height: 100px;
+  padding: 40px;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+#c:hover {
+  background-color: white;
+  color: green;
+  border: green;
+  border-width: thick;
+  font-size: x-large;
+}

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register<</title>
+    <link rel="stylesheet" href="{% static 'css/register.css'%}" />
+  </head>
+  <body id="b">
+    <header>
+      <h1 id="a">Sign Up</h1>
+    </header>
+    <main>
+      <div id="c">
+        <form action="register" method="POST">
+          {%csrf_token%}
+          <input
+            type="text"
+            placeholder="First Name"
+            name="first_name"
+          /><br /><br />
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="last_name"
+          /><br /><br />
+          <input type="email" placeholder="email" name="email" /><br /><br />
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+          /><br /><br />
+          <input type="password" placeholder="Password" name="password" /><br />
+          <br />
+          <input type="submit" /><br />
+        </form>
+      </div>
+      {%for message in messages%}
+      <div><h3 id="x">{{message}}</h3></div>
+      {%endfor%}
+    </main>
+  </body>
+</html>

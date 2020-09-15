@@ -1,0 +1,49 @@
+#a {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: green;
+}
+#b {
+  background-color: grey;
+}
+
+#c {
+  text-align: center;
+  margin-top: 130px;
+}
+
+input[type="text"] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="email"] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="password"] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+input[type="submit"] {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+}
+#x {
+  text-align: center;
+  color: red;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-decoration: transparent;
+}

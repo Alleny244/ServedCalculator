@@ -1,0 +1,13 @@
+#a {
+  background: url("../images/result.jpg");
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+#b {
+  text-align: center;
+  color: black;
+  margin-top: 400px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}

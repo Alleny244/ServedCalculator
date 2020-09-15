@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Served Calculator</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+  </head>
+  <body id="pic">
+    <header id="c">
+      <h1>Served Calculator</h1>
+      <div id="x">
+        <h2 id="z">Description</h2>
+        <p id="y">
+          A calculator that can perform arithmetic operations on two numbers<br />
+          <br />Operators('+' ,'-','*','/','%')<br />
+        </p>
+      </div>
+    </header>
+    <main>
+      <div id="a">
+        <form action="main" method="POST">
+          {%csrf_token%}
+          <input type="number" placeholder="First Number" name="first" />
+          <input
+            type="number"
+            placeholder="Second Number"
+            name="second"
+          /><br />
+          <br /><input type="text" placeholder="operator" name="operator" />
+          <br />
+          <br />
+          <input type="submit" />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

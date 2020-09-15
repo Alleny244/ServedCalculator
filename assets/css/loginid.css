@@ -1,0 +1,40 @@
+input[type="text"] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="password"] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+#b {
+  background: url("../images/loginid.jpg");
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+#a {
+  margin-left: 200px;
+  margin-top: 15%;
+}
+input[type="submit"] {
+  width: 8%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  margin-left: 40px;
+}
+#x {
+  text-align: center;
+  color: black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-decoration: transparent;
+}

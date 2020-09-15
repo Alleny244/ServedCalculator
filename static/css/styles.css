@@ -1,0 +1,33 @@
+#pic {
+  background-image: url("../images/calculator.jpg");
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+#c {
+  text-align: center;
+  color: aliceblue;
+  font-weight: 200;
+  font-size: larger;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-shadow: whitesmoke;
+  text-decoration: black;
+}
+#a {
+  text-align: center;
+  margin-top: 100px;
+}
+#x {
+  margin-top: 70px;
+}
+#y {
+  margin-left: -50px;
+  font-size: large;
+  font-weight: bolder;
+  font-family: monospace;
+  color: honeydew;
+}
+#z {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
