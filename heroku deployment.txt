@@ -1,0 +1,60 @@
+wsgi.py
+
+from whitenoise import WhiteNoise
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "servedcalculator.settings"
+application = get_wsgi_application()
+application = WhiteNoise(application)
+
+Procfile
+web: gunicorn servedcalculator.wsgi 
+
+runtime.txt
+python-3.6.4  (specify python version u are using)
+
+create requirement.txt
+pip freeze>requirement.txt
+
+create .gitignore file
+*.pyc
+db.sqlite3
+
+__pycache__
+
+
+settings.py
+import django_heroku
+import os
+from pathlib import Path
+import dj_database_url
+
+
+DEBUG = False
+
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'user',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': ''
+    }
+}
+
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+django_heroku.settings(locals())
