@@ -1,0 +1,329 @@
+#Django
+http =transfer protocol between client and server when the connnection is established
+TCP =protocol between client and server before the connnection is established
+
+how to create connection
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+Here we made a socket instance and passed it two parameters. 
+The first parameter is AF_INET and the second one 
+is SOCK_STREAM. AF_INET refers to the address family ipv4
+. The SOCK_STREAM means connection oriented TCP protocol.
+
+creating setup for virtualenv in windows
+Installing Virtualenv
+pip install virtualenvwrapper-win
+creating env
+mkvirtualenv test
+in test install django
+pip install django
+checking version
+django-admin --version
+workon test
+django-admin startproject projectname
+TO CReate the server
+navigate to the folder 
+python manage.py runserver
+
+to create app
+workon test
+python manage.py startapp calc
+
+in calc create urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name="home")
+]
+
+edit views.py in calc
+from django.http import HttpResponse
+
+# Create your views here.
+def home(request):
+    return HttpResponse("helloworld");
+
+
+to get calc app working we should include
+path in main project url.py
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('calc.urls'))
+] 
+
+for displaying many html tages
+we create a new folder to keep html files
+then edit settings.py in main project
+import os
+'DIRS': [os.path.join(BASE_DIR,'foldernames')], html files are kwpt
+
+edit views 
+ return render(request, 'filename')
+
+now create new file called base.html shared by all files
+install jinja
+  {% block content%} {% endblock%}
+in home.html
+{% extends 'base.html%
+{% block content%} {% endblock%}
+
+
+adding
+
+create form to add numbers in home.html
+create result.html which displays reult
+add path in urls.py
+edit views add function
+val1 = request.GET['num1']
+    val2 = request.GET['num2']
+    res = int(val1) + int(val2)
+    return render(request, 'result.html', {'result': res})
+
+
+use method="post" in form
+NOT SENDING DATA THROUGH ADDRESS BAR
+{%csrf_token%}
+
+
+to use html css js
+settings.py
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static') specify location in which css and images are preesemt i.e static
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+Django will create a project called assets
+we have to run 
+python manage.py collectstatic
+
+to activate static in index.html
+{% load static %} (top of html) for static images
+"{% static 'styles/bootstrap4/bootstrap.min.css' %}"
+in backround image url
+ style="background-image: url('/static/images/home_slider.jpg')"
+
+in models.py we craete dataset we create calass
+then import in views.py
+create object
+dest1 = Destination()
+    return render(request, 'index.html', {'dest1': dest1})
+
+craete a list of destinations and pass it
+run a for loop in index.html 
+{ % for dest in list%}
+{%endfor%}
+
+to add dynamic images
+{% static "images" as baseUrl%}(at top of file images folder which pics are kept)
+replace this "{% static 'styles/bootstrap4/bootstrap.min.css' %}" with
+   <img src="{{baseUrl}}/{{dest.image}}" alt="" />
+ 
+{%if conditon%}
+{%endif%}
+
+Database
+orm
+django can create database table using class
+postgres
+
+after installing postgesql and pgadmin
+craete a new database in pgadmin
+paswword 1234
+name it
+then edit settings.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgesql',
+        'NAME':  'first',
+        'USER':'postgres',
+        'PASSWORD':'1234'
+        'HOST':'localhost'
+
+    }
+}
+
+connection between django and pgadmin
+pip install psycopg2 connector
+to convert class into tabels
+edit model.py
+check django model documnetation
+
+
+class Destination(models.Model):
+
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='pics')
+    des = models.TextField
+    price = models.IntegerField
+    offer = models.BooleanField(default=False)
+to link this to pgadmins we have to migrate
+
+python manage.py makemigrations (to create file in migrations)
+before migartion
+ edit settingd.py 
+add appname
+
+INSTALLED_APPS = [
+    'travello.apps.TravelloConfig'
+    'django.contrib.admin',
+    'django.contrib.auth',
+
+pip install pillow to handle images
+then run python manage.py makemigrations
+
+to reflect changes in pgadmin
+python manage.py sqlmigrate travello 0001 (appname and migration file)
+python manage.py migrate
+
+to create superuser
+localhost:8000/admin
+then edit admin.py
+before that
+python manage.py createsuperuser
+
+to register models edit admin.py
+from .models import Destination
+# Register your models here.
+admin.site.Register(Destination)
+
+to add media
+edit setting.py
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+edit urls.py to add media
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('travello.urls'))
+]
+
+urlpatterns=urlpatterns+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+then start adding images
+
+after adding images in pgadmin 
+go to views .py
+then remove all dest1 2 3
+
+then edit views
+
+def index(request):
+    dests = Destination.objects.all()
+    return(render(request, 'index.html', {'dests': dests}))
+
+then edit index.html
+ <div class="destination_image">
+					<img src="{{dest.image.url}}" alt="" />
+
+for login and all
+create new app account
+edit urls.py
+
+urlpatterns = [
+    path('register', views.register, name="register")
+
+]
+
+then edit url.py of first
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('travello.urls')),
+    path('accounts/', include('accounts.urls'))
+]
+'
+also add function in views
+
+def register(request):
+    return render(request, 'register.html')
+
+then add register login in main page
+then create register.html in pages
+no need for craeting extra database because in pgadmin
+as we have alraedy migarted
+auth_user
+check the fields in that and edit forms as required in register
+
+edit views.py
+if we submit it is post 
+and if we get register.html get register
+ 
+def register(request):
+    if request.method=='POST':
+        first name=request.POST['first_name']
+        last name=request.POST['last_name']
+        username=request.POST['username']
+        password name=request.POST['password1']
+        confirm password=request.POST[' password2']
+        email=request.POST['email']
+
+
+    else:
+        return render(request, 'register.html')
+ since we already migrated to pgadmin
+we hav users table
+user model framework
+viws.py
+from django.contrib.auth.models import User,auth
+then create object of user
+
+ user=User.objects.create_user(username=username,email=email,password=password1)
+
+        (model=created)
+user.save
+print('user created')
+after filling in datails to go to home page
+import redirect
+
+        return redirect('/')
+
+
+registration completed
+
+add if statrement 
+if password1==password2
+   and check if user exists
+   if User.objects.filter(username=username).exists();
+             print user exisus
+             return redirect('register')
+then for displaying messages
+passing messages in form rather than console
+   in the if part
+    write messages.info(request,'username taken')
+from django.contrib import messages
+
+in register.html
+{{%for message in messages%
+<div><h3>{{message
+
+
+
+def login(request
+ if request.method==post
+    username=request.post['username]
+    password=request.post['password]
+    user=auth.uthenciate(username=sername,password=password)
+if user is not None:
+  auth.login(request,user)
+  return redirect('/')==to home page
+else:
+    messages.info(request,'invalid credentials')
+    return redirect('login')
+
+{%if user.is_authentiated
+log out
+
+def logout(request):
+  auth.logout(request)
+return redirect('home.html')
+
+
